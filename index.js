@@ -8,7 +8,9 @@ const port = 7000;
 // Enable CORS for all routes
 app.use(cors());
 
-const dbFile = "dua_main.sqlite";
+const path = require("path");
+const dbFile = path.resolve(__dirname, "dua_main.sqlite");
+
 const db = new sqlite3.Database(dbFile);
 const categoryQuery = "SELECT * FROM category";
 
