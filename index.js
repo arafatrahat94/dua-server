@@ -27,15 +27,18 @@ app.get("/dua", (req, res) => {
     res.json(rows);
   });
 });
-app.get("/sub_category", (req, res) => {
-  db.all(subCategoryQuery, (err, rows) => {
+app.get("/sub_category", async (req, res) => {
+  const cat_id = req.query.cat_id;
+
+  db.all(subCategoryQuery, async (err, rows) => {
     if (err) {
       console.error(err.message);
       res.status(500).send("Internal Server Error");
       return;
     }
-
-    res.json(rows);
+    const checking = rows.filter((x) => x.cat_id == cat_id);
+    // console.log(rows);
+    res.json(checking);
   });
 });
 app.get("/categoryData", (req, res) => {
